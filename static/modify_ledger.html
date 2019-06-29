@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modify Ledger</title>
+</head>
+<body>
+<form action="/modify_ledger" method="POST">
+  Old Name:<br>
+  <input type="text" name="ledgername" placeholder="Mickey">
+  <br>
+    New Name:<br>
+  <input type="text" name="ledgername" placeholder="Mickey">
+  <br>
+  IN/OUT:<br>
+  <select name = "in_out">
+            <option value = "IN" selected>IN</option>
+            <option value = "OUT">OUT</option>
+         </select>
+  <br><br>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

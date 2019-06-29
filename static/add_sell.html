@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Transasction Entry</title>
+</head>
+<body>
+<form action="/add_new_sell" method="POST">
+      Date:<br>
+  <input type = "date"><br>
+  Customer:<br>
+  <select name = "cust_name">
+            <option value = "Person1" selected>Person1</option>
+            <option value = "Person2">Person2</option>
+         </select>
+  <br>
+     Commodity<br>
+  <select name = "commodity">
+            <option value = "Item1" selected>Item1</option>
+            <option value = "Item2">Item2</option>
+         </select>
+    <br><br>
+     Quantity:
+    <input type="number" name="itemqty" value="" placeholder="5000">
+    <br>
+    Rate:
+    <input type="number" name="itemrate" value="" placeholder="500"><br>
+    <br><br>
+    Amount:
+    <input type="number" name="itemamt" value="" placeholder="500"><br>
+    <br><br>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

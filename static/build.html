@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Build</title>
+</head>
+<body>
+<form action="/build" method="POST">
+  Item Name:<br>
+  <select name = "materials" multiple>
+            <option value = "Material_in1" selected>Material_in1</option>
+            <option value = "Material_in2">Material_in2</option>
+            <option value = "Material_in3">Material_in3</option>
+            <option value = "Material_in4">Material_in4</option>
+      <option value = "Material_in5">Material_in5</option>
+      <option value = "Material_in6">Material_in6</option>
+
+         </select>
+  <br>
+    Color:
+    <input type="text" name="itemcolor" value="" placeholder="RED">
+    <br>
+     Quantity:
+    <input type="number" name="itemqty" value="" placeholder="5000">
+    <br>
+    Rate:
+    <input type="number" name="itemrate" value="" placeholder="500"><br>
+    <br><br>
+     Amount:
+    <input type="number" name="itemamt" value="" placeholder="500"><br>
+    <br><br>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>

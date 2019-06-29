@@ -1,0 +1,21 @@
+1. Items
+2. Person
+3. Authentication
+4. Items_mapping
+5. Cost
+6. Transactions
+7. Quantity
+8. Item_kg_piece
+
+
+
+
+
+authentication
+id,phone no, pass, secret_key
+
+
+
+
+
+

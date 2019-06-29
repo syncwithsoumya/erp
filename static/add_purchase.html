@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Material Procurement</title>
+</head>
+<body>
+<form action="/material_proc_new" method="POST">
+
+  Item Name:<br>
+  <select>
+  <option value="Material1">Material1</option>
+  <option value="Material2">Material2</option>
+  <option value="Material3">Material3</option>
+</select>
+  <br>
+    Date:<br>
+  <input type = "date">
+  <br>
+    <br>
+   Vendor:<br>
+  <select name = "vendors">
+            <option value = "XYZ" selected>XYZ</option>
+            <option value = "ABC">ABC</option>
+         </select>
+  <br>
+    <br>
+    Items in KG((Quantity):<br>
+    <input type="text" name="iteminkg" placeholder="100"><br>
+    Amount:<br>
+        <input type="number" name="iteminkgamount" placeholder="1000"><br><br>
+    Items in Number(Quantity):<br>
+    <input type="text" name="iteminno" placeholder="9760"><br>
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>
