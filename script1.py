@@ -1,32 +1,43 @@
 from flask import Flask,render_template,request
-import pyodbc
-conn= pyodbc.connect(
-    r'DRIVER={SQL Server};'
-    r'SERVER=LAPTOP-GQVL76QU\SQLEXPRESS;'
-    r'DATABASE=Dberp;'
-    r'Trusted_Connection=yes;'
-)
+import pymysql.cursors
+
 
 app=Flask(__name__)
+
+
 
 @app.route('/')
 def home():
     return render_template("home.html")
 
 
-@app.route('/add/',methods=['GET','POST'])
+# Connect to the database
+connection = pymysql.connect(host='localhost',
+                             user='root',
+                             password='root123',
+                             db='erp',
+                             charset='utf8mb4',
+                             cursorclass=pymysql.cursors.DictCursor)
+
+
+print ("connect successful!!")
+
+@app.route('/add',methods=['POST', 'GET'])
 def about():
+
     if request.method == 'POST':
-        userDetails=request.form
-        item=userDetails['itemname']
-        status=userDetails['in_out']
-        color=userDetails['color']
-        cursor = conn.cursor()
-        cursor.execute('INSERT INTO Dberp.dbo.Erpadd(Itemname,Status,Color) VALUES(?,?,?)',(item,status,color))
-        conn.commit()
-        cursor.close()
-        return ('success')
+        item = request.form['itemname']
+        status = request.form['in_out']
+        color = request.form['color']
+
+        with connection.cursor() as cursor:
+            sql = "INSERT INTO Items (item_name,in_out_flag,color) VALUES (%s, %s,%s)"
+            cursor.execute(sql, (item, status,color))
+            connection.commit()
+            connection.close()
+
     return render_template("add_item.html")
+
 
 
 
