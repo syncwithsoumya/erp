@@ -47,7 +47,7 @@ def add_item():
         return render_template("failure.html")
 
 
-@app.route('/add_ledger',methods=['POST', 'GET'])
+@app.route('/add_ledger', methods=['POST', 'GET'])
 def add_ledger():
 
     if request.method == 'POST':
