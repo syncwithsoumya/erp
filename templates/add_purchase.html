@@ -8,10 +8,14 @@
 <form action="/material_proc_new" method="POST">
 
   Item Name:<br>
-  <select>
-  <option value="Material1">Material1</option>
-  <option value="Material2">Material2</option>
-  <option value="Material3">Material3</option>
+  <select name="items">
+      {% if not items_data %}
+        <option value="no_items">No Items to display</option>
+      {% else %}
+        {% for items in items_data %}
+        <option value="{{ items.item_name }}">{{ items.item_name }}</option>
+        {% endfor %}
+      {% endif %}
 </select>
   <br>
     Date:<br>
@@ -20,9 +24,14 @@
     <br>
    Vendor:<br>
   <select name = "vendors">
-            <option value = "XYZ" selected>XYZ</option>
-            <option value = "ABC">ABC</option>
-         </select>
+      {% if not data %}
+        <option value="no_items">No Items to display</option>
+      {% else %}
+        {% for o in data %}
+            <option value="{{ o.ledger_name }}">{{ o.ledger_name }}</option>
+        {% endfor %}
+      {% endif %}
+  </select>
   <br>
     <br>
     Items in KG((Quantity):<br>
