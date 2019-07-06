@@ -72,6 +72,27 @@ def add_purchase():
             return 'Exception'
 
 
+@app.route('/material_proc_new',methods=['POST', 'GET'])
+def add_new_purchase():
+    if request.method == 'POST':
+        itemss=request.form['items']
+        da=request.form['pdate']
+        vendor = request.form['vendors']
+        iteminkgs = request.form['iteminkg']
+        amount = request.form['iteminkgamount']
+        iteminnos = request.form['iteminno']
+        connection = connect_to_db()
+
+
+        with connection.cursor() as cursor:
+            sql = "INSERT INTO purchase (item_name,purchase_date,person,quantity_in_kg,total_amount,item_in_no) VALUES (%s,%s,%s,%s,%s,%s)"
+            cursor.execute(sql,(itemss,da,vendor,int(iteminkgs),int(amount),int(iteminnos)))
+            connection.commit()
+            connection.close()
+
+    return render_template("add_purchase.html")
+
+
 @app.route('/add_ledger', methods=['POST', 'GET'])
 def add_ledger():
     if request.method == 'POST':
@@ -91,6 +112,93 @@ def add_ledger():
                 return redirect(url_for('default'))
             else:
                 return render_template("failure.html")
+
+
+@app.route('/delete_item',methods=['POST', 'GET'])
+def delete_item():
+    if request.method == 'POST':
+        item = request.form['itemname']
+        connection = connect_to_db()
+    try:
+        with connection.cursor() as cursor:
+            sql = "DELETE FROM items WHERE item_name = %s"
+            cursor.execute(sql,item)
+            connection.commit()
+            flag = 'Success'
+    except Exception as e:
+        flag = "Failure with %s" % e
+    finally:
+        connection.close()
+    if flag == 'Success':
+        return redirect(url_for('default'))
+    else:
+        return render_template("failure.html")
+
+
+@app.route('/modify_item',methods=['POST', 'GET'])
+def modify_item():
+    if request.method == 'POST':
+        oldname = request.form['itemname']
+        newname = request.form['newitemname']
+        connection = connect_to_db()
+    try:
+        with connection.cursor() as cursor:
+            sql = "UPDATE items set item_name=%s where item_name=%s"
+            cursor.execute(sql, (newname, oldname))
+            connection.commit()
+            flag = 'Success'
+    except Exception as e:
+        flag = "Failure with %s" % e
+    finally:
+        connection.close()
+    if flag == 'Success':
+        return redirect(url_for('default'))
+    else:
+        return render_template("failure.html")
+
+
+@app.route('/modify_ledger',methods=['POST', 'GET'])
+def modify_ledger():
+    if request.method == 'POST':
+        oldname = request.form['ledgername']
+        newname = request.form['newledgername']
+        connection = connect_to_db()
+    try:
+        with connection.cursor() as cursor:
+            sql = "UPDATE persons set ledger_name=%s where ledger_name=%s"
+            cursor.execute(sql, (newname, oldname))
+            connection.commit()
+            flag = 'Success'
+    except Exception as e:
+        flag = "Failure with %s" % e
+    finally:
+        connection.close()
+    if flag == 'Success':
+        return redirect(url_for('default'))
+    else:
+        return render_template("failure.html")
+
+
+
+@app.route('/delete_ledger',methods=['POST', 'GET'])
+def delete_ledger():
+    if request.method == 'POST':
+        item = request.form['ledgername']
+        connection = connect_to_db()
+    try:
+        with connection.cursor() as cursor:
+            sql = "DELETE FROM persons WHERE ledger_name = %s"
+            cursor.execute(sql,item)
+            connection.commit()
+            flag = 'Success'
+    except Exception as e:
+        flag = "Failure with %s" % e
+    finally:
+        connection.close()
+    if flag == 'Success':
+        return redirect(url_for('default'))
+    else:
+        return render_template("failure.html")
 
 
 if __name__ == '__main__':
